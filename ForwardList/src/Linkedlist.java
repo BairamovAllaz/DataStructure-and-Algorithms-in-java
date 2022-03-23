@@ -1,20 +1,33 @@
-
-public class Linkedlist<T> {
-	
-	public class Node{ 
-		public T data; 
-		Node pNext;		
+import java.util.Iterator;
+public class Linkedlist<T> implements Iterable<Node<T>> {
+	public class ListIterator implements Iterator<Node<T>>{ 
+		private Node<T> tempNode;
 		
-		public Node(T data) {
-			this.data = data;
-			this.pNext = null;
+		public ListIterator(Node<T> tempNode) {
+			this.tempNode = tempNode;
 		}
+		public boolean hasNext() {
+			return tempNode != null;
+		}
+		public Node<T> next() {
+				if(!(hasNext())) { 
+					return tempNode;
+				}
+				Node<T> data = tempNode;
+				tempNode = tempNode.pNext;
+				return data;
+		}
+		public void remove() {
+            throw new UnsupportedOperationException("Remove not implemented.");
+       }
+		
 	}
-	private Node Head;
+	
+	private Node<T> Head;
 	
 	
 	public Linkedlist(Linkedlist<T> list) {
-		Node temNode = list.Head;
+		Node<T> temNode = list.Head;
 		while(temNode != null) { 
 			pushBack(temNode.data);
 			temNode = temNode.pNext;
@@ -26,7 +39,7 @@ public class Linkedlist<T> {
 	
 	
 	public void pushFront(T Data) { 
-		Node newnode = new Node(Data); 
+		Node<T> newnode = new Node<T>(Data); 
 		newnode.pNext = Head; 
 		Head = newnode;
 	}
@@ -35,8 +48,8 @@ public class Linkedlist<T> {
 		if(Head == null) { 
 			pushFront(Data);
 		}
-		Node temp = Head;
-		Node newnode = new Node(Data); 
+		Node<T> temp = Head;
+		Node<T> newnode = new Node<T>(Data); 
 		while(temp.pNext != null) { 
 			temp = temp.pNext;
 		}
@@ -46,8 +59,8 @@ public class Linkedlist<T> {
 	
 	 public void add(int index,T Data) {
 		 
-		 Node newnNode = new Node(Data); 
-		 Node temp = Head; 
+		 Node<T> newnNode = new Node(Data); 
+		 Node<T> temp = Head; 
 		 for(int i = 0; i < index - 1;i++) {
 			temp = temp.pNext; 
 		 }
@@ -61,7 +74,7 @@ public class Linkedlist<T> {
 	}
 	
 	public void clone(Linkedlist<T> list) {  
-		Node temNode = list.Head;
+		Node<T> temNode = list.Head;
 		while(temNode != null) { 
 			pushBack(temNode.data);
 			temNode = temNode.pNext;
@@ -70,7 +83,7 @@ public class Linkedlist<T> {
 
 	
 	public Boolean contains(T Data) { 
-		Node temNode = Head;
+		Node<T> temNode = Head;
 		while(temNode != null) { 
 			if(temNode.data == Data) {
 				return true;
@@ -80,20 +93,20 @@ public class Linkedlist<T> {
 		return false;
 	}
 	
-	public Node get(int index) { 
-		Node temNode = Head;
+	public Node<T> get(int index) { 
+		Node<T> temNode = Head;
 		for(int i = 0;i < index;i++) { 
 			temNode= temNode.pNext;
 		}
 		return temNode;
 	}
 	
-	public Node getFirst() { 
+	public Node<T> getFirst() { 
 		return Head;
 	}
 	
-	public Node getLast() { 
-		Node temp = Head;
+	public Node<T> getLast() { 
+		Node<T> temp = Head;
 		while(temp != null) {
 			temp = temp.pNext;
 		}
@@ -105,14 +118,14 @@ public class Linkedlist<T> {
 		if(Head == null) { 
 			return;
 		}
-		Node erasedNode = Head;
+		Node<T> erasedNode = Head;
 		Head = Head.pNext;
 		erasedNode = null;
 	}
 	
 	
 	public void pop_back() { 
-		Node temp = Head;
+		Node<T> temp = Head;
 		while(temp.pNext.pNext != null) {
 			temp = temp.pNext;
 		}
@@ -120,11 +133,11 @@ public class Linkedlist<T> {
 	}
 	
 	public void erase(int index) { 
-		Node temp = Head;
+		Node<T> temp = Head;
 		for (int i = 0; i < index-1; i++) {
 			temp = temp.pNext; 
 		}
-		Node erased = temp.pNext;
+		Node<T> erased = temp.pNext;
 		temp.pNext = temp.pNext.pNext;
 		erased = null;
 	}
@@ -132,7 +145,7 @@ public class Linkedlist<T> {
 	
 	public int size() { 
 		int s = 0; 
-		Node temp = Head;
+		Node<T> temp = Head;
 		while(temp != null) {
 			s++;
 			temp = temp.pNext;
@@ -141,10 +154,21 @@ public class Linkedlist<T> {
 	}
 	
 	public void print(){
-		Node temp = Head;
-		while(temp != null) {
-			System.out.println(temp.data);
-			temp = temp.pNext;
-		}	
+//		Node temp = Head;
+//		while(temp != null) {
+//			System.out.println(temp.data);
+//			temp = temp.pNext;
+//		}	
+
+//		while(iterator.hasNext()) { 
+//			System.out.print(iterator.next().data + " ");
+//		}
+		
+	}
+
+	@Override
+	public Iterator<Node<T>> iterator() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -1,4 +1,5 @@
 
+
 public class main {
 	public static void main(String args[]) { 
 		Linkedlist<String> a = new Linkedlist<String>();
@@ -46,7 +47,10 @@ public class main {
 		a.pushFront("Hello");
 		
 		
-		a.pop_back();
+		for(Node<String> i : a) { 
+			System.out.println(i.data);
+		}
+		
 		a.print();
 		
 	}
