@@ -1,8 +1,8 @@
 import java.util.Iterator;
 public class Linkedlist<T> implements Iterable<Node<T>> {
+	
 	public class ListIterator implements Iterator<Node<T>>{ 
 		private Node<T> tempNode;
-		
 		public ListIterator(Node<T> tempNode) {
 			this.tempNode = tempNode;
 		}
@@ -22,9 +22,7 @@ public class Linkedlist<T> implements Iterable<Node<T>> {
        }
 		
 	}
-	
 	private Node<T> Head;
-	
 	
 	public Linkedlist(Linkedlist<T> list) {
 		Node<T> temNode = list.Head;
@@ -37,6 +35,18 @@ public class Linkedlist<T> implements Iterable<Node<T>> {
 	public Linkedlist() {
 	}
 	
+	@SafeVarargs
+	public Linkedlist(T...arg) { 
+		for(T i : arg) { 
+			pushBack(i);
+		}
+	}
+	
+	public void createLinkedlist(@SuppressWarnings("unchecked") T...arg) { 
+		for(T i : arg) { 
+			pushBack(i);
+		}
+	}
 	
 	public void pushFront(T Data) { 
 		Node<T> newnode = new Node<T>(Data); 
@@ -80,7 +90,6 @@ public class Linkedlist<T> implements Iterable<Node<T>> {
 			temNode = temNode.pNext;
 		}
 	}
-
 	
 	public Boolean contains(T Data) { 
 		Node<T> temNode = Head;
@@ -93,12 +102,14 @@ public class Linkedlist<T> implements Iterable<Node<T>> {
 		return false;
 	}
 	
-	public Node<T> get(int index) { 
+	public T get(int index) { 
 		Node<T> temNode = Head;
+		T data;
 		for(int i = 0;i < index;i++) { 
 			temNode= temNode.pNext;
 		}
-		return temNode;
+		data = temNode.data;
+		return data;
 	}
 	
 	public Node<T> getFirst() { 
@@ -154,21 +165,15 @@ public class Linkedlist<T> implements Iterable<Node<T>> {
 	}
 	
 	public void print(){
-//		Node temp = Head;
-//		while(temp != null) {
-//			System.out.println(temp.data);
-//			temp = temp.pNext;
-//		}	
-
-//		while(iterator.hasNext()) { 
-//			System.out.print(iterator.next().data + " ");
-//		}
-		
+		Node temp = Head;
+		while(temp != null) {
+			System.out.println(temp.data);
+			temp = temp.pNext;
+		}	
 	}
 
 	@Override
 	public Iterator<Node<T>> iterator() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 }
